@@ -1,3 +1,13 @@
+
+# define PROGRAM_NAME			"42philosophers"
+# define EXIT_DEAD				0
+# define ERROR_ARGS				"error: the specified arguments are invalid!"
+# define ERROR_USAGE			"usage: [nbr_of_philosophers] [die_time] \
+[eat_time] [sleep_time] [optional: number_of_times_each_philosopher_must_eat]"
+# define ERROR_MALLOC			"error: not enough RAM!"
+# define ERROR_CREATE_THREAD	"error: can't properly create threads!"
+
+
 typedef pthread_mutex_t t_mutex;
 typedef pthread_t               t_thread;
 
