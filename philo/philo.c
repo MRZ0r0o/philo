@@ -189,4 +189,113 @@ int	main(int ac, char **av)
 	// 		pthread_create(&init[i].philo, NULL, &routiene, &init[i]);
 	// 		usleep(130);
 	// 	}
-	// }	
+	// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// void *routiene(void *s)
+// {
+// 	t_philo *rt = (t_philo *)s;
+// 	int local = 0;
+// 	while (rt->num_of_epme != 0)
+// 	{	
+// 		pthread_mutex_lock(&rt->env->forks[rt->left_fork]);
+// 		pthread_mutex_lock(&rt->env->forks[rt->right_fork]);
+
+// 		pthread_mutex_lock(rt->env->death_lock);
+// 		local = rt->env->death;
+// 		pthread_mutex_unlock(rt->env->death_lock);
+// 		if (local == 1)
+// 		{
+// 			pthread_mutex_unlock(&rt->env->forks[rt->right_fork]);
+// 			pthread_mutex_unlock(&rt->env->forks[rt->left_fork]);
+// 			return (NULL);
+// 		}
+			
+		
+// 		pthread_mutex_lock(rt->env->print);
+// 		printf("%lld philo number %d take the right fork\n", current_timestamp() - rt->starting, rt->id);
+// 		printf("%lld philo number %d take the left fork\n", current_timestamp() - rt->starting, rt->id);
+// 		printf("%lld philo number %d is eating \n", current_timestamp() - rt->starting, rt->id);
+// 		pthread_mutex_unlock(rt->env->print);
+		
+// 		rt->last_time_eat = current_timestamp() - rt->starting;
+// 		pausing(rt);
+		
+// 		pthread_mutex_unlock(&rt->env->forks[rt->right_fork]);
+// 		pthread_mutex_unlock(&rt->env->forks[rt->left_fork]);
+		
+// 		pthread_mutex_lock(rt->env->death_lock);
+// 		local = rt->env->death;
+// 		pthread_mutex_unlock(rt->env->death_lock);
+// 		if (local == 1)
+// 			return (NULL);
+
+// 		pthread_mutex_lock(rt->env->print);
+// 		printf("%lld philo number %d is sleeping \n", current_timestamp() - rt->starting, rt->id);
+// 		pthread_mutex_unlock(rt->env->print);
+		
+// 		sleeper(rt->env->time_to_sleep);
+		
+// 		pthread_mutex_lock(rt->env->death_lock);
+// 		local = rt->env->death;
+// 		pthread_mutex_unlock(rt->env->death_lock);
+// 		if (local == 1)
+// 			return (NULL);
+
+// 		pthread_mutex_lock(rt->env->print);
+// 		printf("%lld philo number %d is thinking \n", current_timestamp() - rt->starting, rt->id);
+// 		pthread_mutex_unlock(rt->env->print);
+// 		rt->num_of_epme--;
+// 	}
+// 	return(NULL);
+// }
