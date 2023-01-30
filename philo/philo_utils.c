@@ -6,7 +6,7 @@
 /*   By: mradwan <mradwan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:29:07 by mradwan           #+#    #+#             */
-/*   Updated: 2023/01/25 21:36:22 by mradwan          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:09:07 by mradwan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,95 +14,56 @@
 
 int	ft_atoi(const char *str)
 {
-	int					i;
-	int					k;
-	unsigned long long	value;
-	int					d;
+	int			i;
+	long int	res;
+	int			sign;
 
 	i = 0;
-	k = 1;
-	d = 0;
-	value = 0;
-	while (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
-			i++;
+	sign = 1;
+	res = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
 	if (str[i] == '+' || str[i] == '-')
 		if (str[i++] == '-')
-			k = k * -1;
+			sign = sign * -1;
 	while (str[i] == '0')
 			i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		value = (value * 10) + (str[i++] - '0');
-		d++;
+		res = (res * 10) + (str[i++] - '0');
+		if ((res > 2147483647 && sign == 1) || (res > 2147483648 && sign == -1))
+			return (0);
 	}
-	if (d > 19 || value >= 9223372036854775808ULL)
-		return (-(k == 1));
-	return (value * k);
+	return (res * sign);
 }
 
-long long int current_timestamp(void)
+long long int	current_timestamp(void)
 {
-    struct timeval te; 
-    gettimeofday(&te, NULL);
-    long long int milliseconds;
+	struct timeval	te;
+	long long int	milliseconds;
+
+	gettimeofday(&te, NULL);
 	milliseconds = te.tv_sec * 1000LL + te.tv_usec / 1000;
-    return (milliseconds);
+	return (milliseconds);
 }
 
-int	checker_one(int ac, char **av)
+void	sleeper(size_t milliseconds)
 {
-	int i = 0;
-	int j = 1;
-	if(ac == 5 || ac == 6)
-	{
-		while (av[j])
-		{
-			i = 0;
-			while (av[j][i])
-			{
-				if(av[j][i] >= '0' && av[j][i] <= '9')
-					i++;
-				else
-					return(0);
-			}
-			j++;
-		}
-	}
-	else
-		return(0);
-	i = 1;
-	while (i < j)
-	{
-		if(av[i][0] == '\0')
-			return(0);
-		i++;
-	}
-	i = 2;
-	while (i < j - 1)
-	{
-		if(ft_atoi(av[1]) > 200 || ft_atoi(av[i]) < 60)
-			return(0);
-		i++;
-	}
-	return(1);
-}
+	size_t	start_time;
 
-void    sleeper(size_t milliseconds)
-{
-        size_t  start_time;
-
-        start_time = current_timestamp();
-        while (current_timestamp() - start_time < milliseconds)
-                usleep(50);
+	start_time = current_timestamp();
+	while (current_timestamp() - start_time < milliseconds)
+		usleep(50);
 }
 
 void	pausing(t_philo *pause)
 {
-	long long time = current_timestamp();
+	long long	time;
 
+	time = current_timestamp();
 	while (1)
 	{
-		if(current_timestamp() - time >= pause->env->time_to_eat)
+		if (current_timestamp() - time >= pause->env->time_to_eat)
 			break ;
 		usleep(500);
 	}
